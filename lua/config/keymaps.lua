@@ -31,18 +31,15 @@ vim.keymap.set("n", "<S-Tab>", "<<", { desc = "Remove indentation in normal mode
 
 -- Quick theme refresh
 vim.keymap.set("n", "<leader>tr", function()
-  vim.cmd("Lazy reload catppuccin")
-  vim.cmd("colorscheme catppuccin")
+  vim.cmd("Lazy reload tokyonight.nvim")
+  -- vim.cmd("colorscheme Default")
 end, { desc = "Refresh theme" })
 
 -- Treesitter capture inspection
 vim.keymap.set("n", "<leader>ti", function()
   -- Get treesitter information at cursor
-  local captures = vim.treesitter.get_captures_at_pos(
-    vim.api.nvim_get_current_buf(),
-    vim.fn.line('.') - 1,
-    vim.fn.col('.') - 1
-  )
+  local captures =
+    vim.treesitter.get_captures_at_pos(vim.api.nvim_get_current_buf(), vim.fn.line(".") - 1, vim.fn.col(".") - 1)
 
   -- Create buffer for floating window
   local buf = vim.api.nvim_create_buf(false, true)
@@ -62,13 +59,16 @@ vim.keymap.set("n", "<leader>ti", function()
         links_to = " links to " .. hl.link
       end
 
-      table.insert(lines, string.format(
-        "  @%s%s priority: %d language: %s",
-        capture.capture,
-        links_to,
-        capture.priority or 0,
-        capture.lang or "unknown"
-      ))
+      table.insert(
+        lines,
+        string.format(
+          "  @%s%s priority: %d language: %s",
+          capture.capture,
+          links_to,
+          capture.priority or 0,
+          capture.lang or "unknown"
+        )
+      )
     end
   end
 
@@ -89,7 +89,7 @@ vim.keymap.set("n", "<leader>ti", function()
 
   -- Auto-close when cursor moves
   local close_group = vim.api.nvim_create_augroup("CloseTreesitterInspect", { clear = false })
-  vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI", "InsertEnter", "WinLeave"}, {
+  vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "InsertEnter", "WinLeave" }, {
     group = close_group,
     buffer = vim.api.nvim_get_current_buf(),
     once = true,
@@ -98,8 +98,8 @@ vim.keymap.set("n", "<leader>ti", function()
         vim.api.nvim_win_close(win, true)
       end
       if vim.api.nvim_buf_is_valid(buf) then
-        vim.api.nvim_buf_delete(buf, {force = true})
+        vim.api.nvim_buf_delete(buf, { force = true })
       end
-    end
+    end,
   })
 end, { desc = "Show Treesitter captures at cursor" })
