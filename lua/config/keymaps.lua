@@ -29,6 +29,7 @@ vim.keymap.set("n", "<S-Tab>", "<<", { desc = "Remove indentation in normal mode
 --   gbc - comment/uncomment with block comments
 --   gb  - block comment in visual mode
 
+
 -- Quick theme refresh
 vim.keymap.set("n", "<leader>tr", function()
   vim.cmd("Lazy reload tokyonight.nvim")
