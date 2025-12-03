@@ -36,6 +36,12 @@ vim.keymap.set("n", "<leader>tr", function()
   -- vim.cmd("colorscheme Default")
 end, { desc = "Refresh theme" })
 
+-- LSP reload
+vim.keymap.set("n", "<leader>lr", function()
+  vim.cmd("LspRestart")
+  print("LSP servers restarted")
+end, { desc = "Reload LSP servers" })
+
 -- Treesitter capture inspection
 vim.keymap.set("n", "<leader>ti", function()
   -- Get treesitter information at cursor
