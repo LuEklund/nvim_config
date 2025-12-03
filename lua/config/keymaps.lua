@@ -42,6 +42,13 @@ vim.keymap.set("n", "<leader>lr", function()
   print("LSP servers restarted")
 end, { desc = "Reload LSP servers" })
 
+-- Jump to specific buffer numbers
+for i = 1, 9 do
+  vim.keymap.set("n", string.format("<leader>b%d", i), function()
+    require("bufferline").go_to_buffer(i, true)
+  end, { desc = string.format("Go to buffer %d", i) })
+end
+
 -- Treesitter capture inspection
 vim.keymap.set("n", "<leader>ti", function()
   -- Get treesitter information at cursor
