@@ -22,7 +22,7 @@ return {
       desc = "Multi-cursor add up",
     },
     {
-      mode = "n",
+      mode = { "n", "v" },
       "<C-n>",
       "<cmd>MultipleCursorsAddJumpNextMatch<cr>",
       desc = "Multi-cursor add jump next match",
