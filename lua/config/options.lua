@@ -3,8 +3,7 @@
 -- Add any additional options here
 vim.g.lazygit_config = false
 
--- Disable all animations for instant navigation
-vim.opt.lazyredraw = true
+-- Disable most animations for instant navigation
 vim.opt.smoothscroll = false
 vim.opt.jumpoptions = ""
 vim.opt.scrolloff = 0
