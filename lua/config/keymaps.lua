@@ -117,3 +117,8 @@ vim.keymap.set("n", "<leader>ti", function()
     end,
   })
 end, { desc = "Show Treesitter captures at cursor" })
+
+-- LSP rename
+vim.keymap.set("n", "<leader>rn", function()
+  vim.lsp.buf.rename()
+end, { desc = "LSP rename" })
