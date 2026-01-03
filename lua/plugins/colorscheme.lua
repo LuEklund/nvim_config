@@ -53,6 +53,9 @@ return {
 
             -- operators
             ["@operator"] = { fg = "#D4D4D4" },
+
+            -- bracket
+            ["@punctuation.bracket"] = { fg = "#eea9fb" },
           }
         end,
       })
