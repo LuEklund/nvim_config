@@ -29,12 +29,14 @@ vim.keymap.set("n", "<S-Tab>", "<<", { desc = "Remove indentation in normal mode
 --   gbc - comment/uncomment with block comments
 --   gb  - block comment in visual mode
 
-
 -- Quick theme refresh
+-- vim.keymap.set("n", "<leader>tr", function()
+--   vim.cmd("Lazy reload tokyonight.nvim")
+--   -- vim.cmd("colorscheme Default")
+-- end, { desc = "Refresh theme" })
 vim.keymap.set("n", "<leader>tr", function()
-  vim.cmd("Lazy reload tokyonight.nvim")
-  -- vim.cmd("colorscheme Default")
-end, { desc = "Refresh theme" })
+  vim.cmd("colorscheme catppuccin")
+end, { desc = "Reload colorscheme" })
 
 -- LSP reload
 vim.keymap.set("n", "<leader>lr", function()
@@ -122,4 +124,3 @@ end, { desc = "Show Treesitter captures at cursor" })
 vim.keymap.set("n", "<leader>rn", function()
   vim.lsp.buf.rename()
 end, { desc = "LSP rename" })
-
