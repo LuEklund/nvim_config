@@ -22,21 +22,14 @@ vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "Remove indentation from selectio
 vim.keymap.set("n", "<Tab>", ">>", { desc = "Indent in normal mode" })
 vim.keymap.set("n", "<S-Tab>", "<<", { desc = "Remove indentation in normal mode" })
 
--- Comment.nvim provides builtin commenting functionality
--- Use:
---   gcc - comment/uncomment current line
---   gc  - comment/uncomment in visual mode
---   gbc - comment/uncomment with block comments
---   gb  - block comment in visual mode
+-- Toggle Zig inlay hints
+vim.keymap.set("n", "<C-A-+>", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle inlay hints" })
 
--- Quick theme refresh
--- vim.keymap.set("n", "<leader>tr", function()
---   vim.cmd("Lazy reload tokyonight.nvim")
---   -- vim.cmd("colorscheme Default")
--- end, { desc = "Refresh theme" })
-vim.keymap.set("n", "<leader>tr", function()
-  vim.cmd("colorscheme catppuccin")
-end, { desc = "Reload colorscheme" })
+vim.keymap.set("n", "<leader>tw", function()
+  vim.wo.wrap = not vim.wo.wrap
+end, { desc = "Toggle line wrap" })
 
 -- LSP reload
 vim.keymap.set("n", "<leader>lr", function()
