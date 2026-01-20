@@ -2,10 +2,16 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- Move lines up and down with Alt+Up/Down (like VS Code)
--- Normal mode: move current line
-vim.keymap.set("n", "<M-Down>", ":m .+1<CR>==", { desc = "Move line down" })
-vim.keymap.set("n", "<M-Up>", ":m .-2<CR>==", { desc = "Move line up" })
+-- Normal mode: move current line (supports counts)
+vim.keymap.set("n", "<M-Down>", function()
+  vim.cmd("move .+" .. vim.v.count1)
+  vim.cmd("normal! ==")
+end, { desc = "Move line down" })
+
+vim.keymap.set("n", "<M-Up>", function()
+  vim.cmd("move .-" .. (vim.v.count1 + 1))
+  vim.cmd("normal! ==")
+end, { desc = "Move line up" })
 
 -- Visual mode: move selected lines
 vim.keymap.set("v", "<M-Down>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
@@ -36,6 +42,9 @@ vim.keymap.set("n", "<leader>lr", function()
   vim.cmd("LspRestart")
   print("LSP servers restarted")
 end, { desc = "Reload LSP servers" })
+
+-- Map + to jump to end of line
+vim.api.nvim_set_keymap("n", "+", "$", { noremap = true, silent = true })
 
 -- Jump to specific buffer numbers
 for i = 1, 9 do
@@ -112,6 +121,9 @@ vim.keymap.set("n", "<leader>ti", function()
     end,
   })
 end, { desc = "Show Treesitter captures at cursor" })
+
+-- Jump forward in normal mode using Ctrl-I
+vim.keymap.set("n", "<C-i>", "<C-i>", { noremap = true, desc = "Jump forward" })
 
 -- LSP rename
 vim.keymap.set("n", "<leader>rn", function()
