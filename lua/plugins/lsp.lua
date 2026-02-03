@@ -12,6 +12,11 @@ return {
         -- pyright = {},
         -- tsserver = {},
       },
+      omnisharp = {
+        cmd = { vim.env.HOME .. "/.local/share/nvim/mason/bin/OmniSharp" },
+        enable_roslyn_analyzers = true,
+        organize_imports_on_format = true,
+      },
     },
   },
 
@@ -19,7 +24,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "zig", "java" })
+      vim.list_extend(opts.ensure_installed, { "zig", "java", "c_sharp", "c_sharp" })
     end,
   },
 
@@ -27,8 +32,7 @@ return {
   {
     "mason-org/mason.nvim",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "zls", "jdtls" })
+      vim.list_extend(opts.ensure_installed, { "zls", "jdtls", "omnisharp" })
     end,
   },
 }
-
