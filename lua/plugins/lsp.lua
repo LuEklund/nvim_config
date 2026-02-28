@@ -7,6 +7,7 @@ return {
         zls = {
           cmd = { "/usr/local/bin/zls" },
         },
+        clangd = {}, -- C/C++ LSP
         jdtls = {}, -- Java LSP
         -- add other lsp servers here as needed
         -- pyright = {},
@@ -24,7 +25,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "zig", "java", "c_sharp", "c_sharp" })
+      vim.list_extend(opts.ensure_installed, { "zig", "java", "c_sharp", "c", "cpp" })
     end,
   },
 
@@ -32,7 +33,7 @@ return {
   {
     "mason-org/mason.nvim",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "zls", "jdtls", "omnisharp" })
+      vim.list_extend(opts.ensure_installed, { "zls", "clangd", "jdtls", "omnisharp" })
     end,
   },
 }

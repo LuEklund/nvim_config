@@ -7,7 +7,7 @@ return {
     config = function()
       require("catppuccin").setup({
         flavour = "auto",
-        transparent_background = true,
+        transparent_background = false,
 
         custom_highlights = function()
           return {
