@@ -1,37 +1,20 @@
 return {
-  "brenton-leighton/multiple-cursors.nvim",
+  "mg979/vim-visual-multi",
   event = "VeryLazy",
-  opts = {},
-  keys = {
-    {
-      mode = { "n", "v" },
-      "<Leader>ma",
-      "<cmd>MultipleCursorsAddMatches<cr>",
-      desc = "Multi-cursor add matches",
-    },
-    {
-      mode = { "n", "v" },
-      "<C-x>",
-      "<cmd>MultipleCursorsAddDown<cr>",
-      desc = "Multi-cursor add down",
-    },
-    {
-      mode = { "n", "v" },
-      "<C-p>",
-      "<cmd>MultipleCursorsAddUp<cr>",
-      desc = "Multi-cursor add up",
-    },
-    {
-      mode = { "n", "v" },
-      "<C-n>",
-      "<cmd>MultipleCursorsAddJumpNextMatch<cr>",
-      desc = "Multi-cursor add jump next match",
-    },
-    {
-      mode = "n",
-      "<Leader>mm",
-      "<cmd>MultipleCursorsMouseAddDelete<cr>",
-      desc = "Multi-cursor mouse add/delete",
-    },
-  },
+  init = function()
+    -- Key mappings for vim-visual-multi
+    -- <C-n> - Start multi-cursor on word under cursor, then add next match
+    -- <C-x> - Skip next match
+    -- <C-p> - Remove previous cursor
+    -- <Leader>ma - Select all occurrences of word in entire buffer
+    vim.g.VM_maps = {
+      ["Find Under"] = "<C-n>",
+      ["Find Subword Under"] = "<C-n>",
+      ["Skip Region"] = "<C-x>",
+      ["Remove Region"] = "<C-p>",
+      ["Select All"] = "<Leader>ma",
+    }
+    -- Don't remap default mappings
+    vim.g.VM_default_mappings = 0
+  end,
 }
