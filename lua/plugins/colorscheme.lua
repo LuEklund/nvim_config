@@ -21,7 +21,7 @@ return {
 
             -- types
             Type = { fg = "#4EC9B0" },
-            ["@type"] = { fg = "#4EC9B0" },
+            ["@type"] = { fg = "#4EC9B0", bold = false },
             ["@type.builtin"] = { fg = "#4EC9B0" },
 
             -- Module

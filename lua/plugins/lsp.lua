@@ -9,6 +9,7 @@ return {
         },
         clangd = {}, -- C/C++ LSP
         jdtls = {}, -- Java LSP
+        glsl_analyzer = {}, -- GLSL LSP
         -- add other lsp servers here as needed
         -- pyright = {},
         -- tsserver = {},
@@ -25,7 +26,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "zig", "java", "c_sharp", "c", "cpp" })
+      vim.list_extend(opts.ensure_installed, { "zig", "java", "c_sharp", "c", "cpp", "glsl" })
     end,
   },
 
@@ -33,7 +34,7 @@ return {
   {
     "mason-org/mason.nvim",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "zls", "clangd", "jdtls", "omnisharp" })
+      vim.list_extend(opts.ensure_installed, { "zls", "clangd", "jdtls", "omnisharp", "glsl_analyzer" })
     end,
   },
 }
