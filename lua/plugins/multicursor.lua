@@ -1,20 +1,21 @@
+-- Multi-cursor using jake-stewart/multicursor.nvim
 return {
-  "mg979/vim-visual-multi",
+  "jake-stewart/multicursor.nvim",
+  branch = "1.0",
   event = "VeryLazy",
-  init = function()
-    -- Key mappings for vim-visual-multi
-    -- <C-n> - Start multi-cursor on word under cursor, then add next match
-    -- <C-x> - Skip next match
-    -- <C-p> - Remove previous cursor
-    -- <Leader>ma - Select all occurrences of word in entire buffer
-    vim.g.VM_maps = {
-      ["Find Under"] = "<C-n>",
-      ["Find Subword Under"] = "<C-n>",
-      ["Skip Region"] = "<C-x>",
-      ["Remove Region"] = "<C-p>",
-      ["Select All"] = "<Leader>ma",
-    }
-    -- Don't remap default mappings
-    vim.g.VM_default_mappings = 0
+  config = function()
+    local mc = require("multicursor-nvim")
+    mc.setup()
+
+    local set = vim.keymap.set
+
+    set({ "n", "x" }, "<C-n>", function() mc.matchAddCursor(1) end)
+    set({ "n", "x" }, "<C-x>", function() mc.matchSkipCursor(1) end)
+    set({ "n", "x" }, "<C-p>", function() mc.matchAddCursor(-1) end)
+    set({ "n", "x" }, "<Leader>ma", mc.matchAllAddCursors)
+
+    mc.addKeymapLayer(function(layerSet)
+      layerSet("n", "<esc>", mc.clearCursors)
+    end)
   end,
 }

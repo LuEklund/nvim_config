@@ -10,14 +10,11 @@ return {
         clangd = {}, -- C/C++ LSP
         jdtls = {}, -- Java LSP
         glsl_analyzer = {}, -- GLSL LSP
-        -- add other lsp servers here as needed
-        -- pyright = {},
-        -- tsserver = {},
-      },
-      omnisharp = {
-        cmd = { vim.env.HOME .. "/.local/share/nvim/mason/bin/OmniSharp" },
-        enable_roslyn_analyzers = true,
-        organize_imports_on_format = true,
+        omnisharp = {
+          cmd = { vim.env.HOME .. "/.local/share/nvim/mason/bin/OmniSharp" },
+          enable_roslyn_analyzers = true,
+          organize_imports_on_format = true,
+        },
       },
     },
   },

@@ -1,14 +1,3 @@
-vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
-  pattern = "*.zig",
-  callback = function()
-    local lint = require("lint")
-    local root = vim.fs.root(0, { "build.zig", ".git" }) or vim.loop.cwd()
-    lint.lint(lint.linters.zig_build, { cwd = root })
-  end,
-})
-
--- ~/.config/nvim/lua/config/autocmds.lua
-
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     -- run after UI settles so window list is stable

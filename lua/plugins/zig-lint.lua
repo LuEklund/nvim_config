@@ -43,6 +43,14 @@ return {
 
       lint.linters_by_ft = lint.linters_by_ft or {}
       lint.linters_by_ft.zig = { "zig_build" }
+
+      vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+        pattern = "*.zig",
+        callback = function()
+          local root = vim.fs.root(0, { "build.zig", ".git" }) or vim.uv.cwd()
+          lint.try_lint("zig_build", { cwd = root })
+        end,
+      })
     end,
   },
 }

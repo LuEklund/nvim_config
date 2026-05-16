@@ -19,8 +19,15 @@ return {
           for _, km in ipairs(mappings) do
             local key = vim.fn.keytrans(km.lhs)
             if key == "<CR>" then
-              print(string.format("  lhs: %s, rhs: %s, desc: %s, callback: %s",
-                km.lhs, km.rhs or "nil", km.desc or "nil", km.callback and "yes" or "no"))
+              print(
+                string.format(
+                  "  lhs: %s, rhs: %s, desc: %s, callback: %s",
+                  km.lhs,
+                  km.rhs or "nil",
+                  km.desc or "nil",
+                  km.callback and "yes" or "no"
+                )
+              )
             end
           end
         end)
