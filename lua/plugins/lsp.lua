@@ -6,6 +6,17 @@ return {
       servers = {
         zls = {
           cmd = { "/usr/local/bin/zls" },
+          -- Build-on-save runs the project's default build step on save.
+          -- Replaces the old nvim-lint `zig build` hack: surfaces compile
+          -- errors as diagnostics, AND (re)builds the timestamped dynlib so
+          -- hot reload kicks in on save. Don't add `build_on_save_args =
+          -- {"check"}` here -- a check step uses -fno-emit-bin and would not
+          -- emit the dynlib, breaking hot reload.
+          settings = {
+            zls = {
+              enable_build_on_save = true,
+            },
+          },
         },
         clangd = {}, -- C/C++ LSP
         jdtls = {}, -- Java LSP

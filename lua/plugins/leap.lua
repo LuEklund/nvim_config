@@ -1,6 +1,6 @@
 return {
   {
-    "ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim.git",
     config = function()
       local leap = require("leap") -- get the module
       leap.opts.case_sensitive = true -- set option
