@@ -21,6 +21,20 @@ vim.keymap.set("v", "<M-Up>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" }
 vim.keymap.set("i", "<M-Down>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down" })
 vim.keymap.set("i", "<M-Up>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up" })
 
+-- Helix-style move line with C-j / C-k (overrides LazyVim window nav on these keys)
+vim.keymap.set("n", "<C-j>", function()
+  vim.cmd("move .+" .. vim.v.count1)
+  vim.cmd("normal! ==")
+end, { desc = "Move line down" })
+
+vim.keymap.set("n", "<C-k>", function()
+  vim.cmd("move .-" .. (vim.v.count1 + 1))
+  vim.cmd("normal! ==")
+end, { desc = "Move line up" })
+
+vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
 -- Indentation controls
 vim.keymap.set("i", "<S-Tab>", "<C-d>", { desc = "Remove indentation in insert mode" })
 vim.keymap.set("v", "<Tab>", ">gv", { desc = "Indent selection" })
@@ -28,8 +42,8 @@ vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "Remove indentation from selectio
 vim.keymap.set("n", "<Tab>", ">>", { desc = "Indent in normal mode" })
 vim.keymap.set("n", "<S-Tab>", "<<", { desc = "Remove indentation in normal mode" })
 
--- Toggle Zig inlay hints
-vim.keymap.set("n", "<C-A-+>", function()
+-- Toggle inlay hints (Helix: Space t i)
+vim.keymap.set("n", "<leader>ti", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle inlay hints" })
 
@@ -43,6 +57,15 @@ vim.keymap.set("n", "<leader>lr", function()
   print("LSP servers restarted")
 end, { desc = "Reload LSP servers" })
 
+-- Diagnostics picker (Helix: Space d = buffer, Space D = workspace)
+-- Drop LazyVim's Snacks-profiler maps that turn <leader>d into a prefix menu.
+-- (which-key group labels are removed in lua/plugins/diagnostics.lua)
+for _, k in ipairs({ "<leader>dpp", "<leader>dph", "<leader>dps" }) do
+  pcall(vim.keymap.del, "n", k)
+end
+vim.keymap.set("n", "<leader>d", "<cmd>Telescope diagnostics bufnr=0<cr>", { desc = "Diagnostics (buffer)" })
+vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics (workspace)" })
+
 -- Map + to jump to end of line
 vim.api.nvim_set_keymap("n", "+", "$", { noremap = true, silent = true })
 
@@ -53,8 +76,8 @@ for i = 1, 9 do
   end, { desc = string.format("Go to buffer %d", i) })
 end
 
--- Treesitter capture inspection
-vim.keymap.set("n", "<leader>ti", function()
+-- Treesitter capture inspection (moved off <leader>ti, now inlay-hint toggle)
+vim.keymap.set("n", "<leader>tI", function()
   -- Get treesitter information at cursor
   local captures =
     vim.treesitter.get_captures_at_pos(vim.api.nvim_get_current_buf(), vim.fn.line(".") - 1, vim.fn.col(".") - 1)
