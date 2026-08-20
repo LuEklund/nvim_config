@@ -42,6 +42,12 @@ return {
             -- LSP semantic tokens (override Treesitter)
             ["@lsp.type.property"] = { fg = "#9CDCFE", force = true },
             ["@lsp.type.variable"] = { fg = "#9CDCFE", force = true },
+            -- zls emits "namespace" for struct types (structs are namespaces
+            -- in zig); catppuccin's default lavender looks like variable blue
+            ["@lsp.type.namespace.zig"] = { fg = "#4EC9B0", force = true },
+            ["@lsp.type.struct.zig"] = { fg = "#4ec98f", bold = true, force = true },
+            ["@lsp.type.type.zig"] = { fg = "#4ec98f", bold = true, force = true },
+            ["@lsp.type.enum.zig"] = { fg = "#4ec98f", bold = true, force = true },
 
             -- constants / numbers
             ["@constant"] = { fg = "#4FC1FF" },
@@ -62,5 +68,14 @@ return {
 
       vim.cmd("colorscheme catppuccin")
     end,
+  },
+
+  {
+    "xiyaowong/transparent.nvim",
+    lazy = false,
+    priority = 999,
+    opts = {
+      extra_groups = { "NormalFloat", "FloatBorder" },
+    },
   },
 }
